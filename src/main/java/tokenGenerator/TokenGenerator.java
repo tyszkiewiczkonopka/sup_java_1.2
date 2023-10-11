@@ -14,17 +14,18 @@ public class TokenGenerator {
 
         this.tokenLength = tokenLength;
 
-        if (!validateTokenLength()) {
+        if (validateTokenLength()) {
+            for (int i = 1; i <= tokenLength; i++) {
+                Random random = new Random();
+                token = token + (char) random.nextInt(33, 126);
+            }
+            System.out.println("Your token: "+ token);
+       } else {
             System.out.println("Sorry, the number you provided for token length is not valid.\n" +
-                    "Please choose between 5, 10 or 15 characters.");
-            return null;
-       }
-
-        for (int i = 1; i <= tokenLength; i++) {
-            Random random = new Random();
-            token = token + (char) random.nextInt(33, 126);
+                    "Choose from accepted token lengths: " + validTokenLengths);
         }
         return token;
+
     }
 
     private boolean validateTokenLength() {
